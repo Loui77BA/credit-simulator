@@ -1,10 +1,11 @@
 package com.example.creditsimulator.model;
 
+import java.math.BigDecimal;
+import java.time.LocalDate;
+
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Past;
-import java.math.BigDecimal;
-import java.time.LocalDate;
 
 public class LoanSimulationRequest {
 
