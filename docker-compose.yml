@@ -1,0 +1,33 @@
+version: '3.8'
+
+services:
+  credit-simulator:
+    build: .
+    container_name: credit-simulator
+    ports:
+      - '8080:8080'
+    environment:
+      # Variáveis de ambiente podem ser usadas para configurar a aplicação, como taxas de câmbio dinâmicas
+      # CURRENCY_USD_TO_BRL: '5.0'
+      # CURRENCY_EUR_TO_BRL: '6.0'
+      SPRING_PROFILES_ACTIVE: default
+      LOGGING_LEVEL_ORG_SPRINGFRAMEWORK_WEB: DEBUG
+      LOGGING_LEVEL_COM_EXAMPLE_CREDITSIMULATOR: DEBUG
+    networks:
+      - credit-network
+
+  # Exemplo opcional de serviço de mensageria. Este serviço não é utilizado pelo
+  # simulador atual, mas demonstra como integrar um broker como RabbitMQ para
+  # processar simulações assíncronas em ambientes de alta volumetria.
+  # rabbitmq:
+  #   image: rabbitmq:3-management
+  #   container_name: rabbitmq
+  #   ports:
+  #     - "5672:5672"
+  #     - "15672:15672"
+  #   networks:
+  #     - credit-network
+
+networks:
+  credit-network:
+    driver: bridge
