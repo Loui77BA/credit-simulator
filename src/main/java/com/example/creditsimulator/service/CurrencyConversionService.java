@@ -1,7 +1,8 @@
 package com.example.creditsimulator.service;
 
-import com.example.creditsimulator.model.Currency;
 import java.math.BigDecimal;
+
+import com.example.creditsimulator.model.Currency;
 
 public interface CurrencyConversionService {
 

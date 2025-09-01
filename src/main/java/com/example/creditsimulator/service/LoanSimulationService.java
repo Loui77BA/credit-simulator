@@ -1,13 +1,5 @@
 package com.example.creditsimulator.service;
 
-import com.example.creditsimulator.model.Currency;
-import com.example.creditsimulator.model.InterestRateScenario;
-import com.example.creditsimulator.model.LoanSimulationRequest;
-import com.example.creditsimulator.model.LoanSimulationResponse;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.util.Assert;
-
 import java.math.BigDecimal;
 import java.math.MathContext;
 import java.math.RoundingMode;
@@ -15,8 +7,14 @@ import java.time.LocalDate;
 import java.time.Period;
 import java.util.List;
 import java.util.Objects;
-import java.util.concurrent.CompletableFuture;
 import java.util.stream.Collectors;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.example.creditsimulator.model.Currency;
+import com.example.creditsimulator.model.LoanSimulationRequest;
+import com.example.creditsimulator.model.LoanSimulationResponse;
 
 @Service
 public class LoanSimulationService {
@@ -80,6 +78,16 @@ public class LoanSimulationService {
         return new LoanSimulationResponse(totalPayable, monthlyInstallment, totalInterest, annualRate, request.getCurrency());
     }
 
+    /**
+     * Processa múltiplas requisições de simulação de forma concorrente. Para alta
+     * volumetria, utilizamos streams paralelos, que dividem o trabalho entre
+     * múltiplos núcleos disponíveis. Em um ambiente corporativo, seria possível
+     * utilizar também {@link java.util.concurrent.ExecutorService} ou filas de
+     * mensageria para distribuir a carga de processamento.
+     *
+     * @param requests lista de requisições de simulação
+     * @return lista de respostas para cada simulação
+     */
     public List<LoanSimulationResponse> simulateLoans(List<LoanSimulationRequest> requests) {
         Objects.requireNonNull(requests, "requests must not be null");
         return requests.parallelStream()

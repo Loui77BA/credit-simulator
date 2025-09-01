@@ -1,10 +1,11 @@
 package com.example.creditsimulator.service;
 
-import com.example.creditsimulator.model.Currency;
-import org.springframework.stereotype.Service;
-
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+
+import org.springframework.stereotype.Service;
+
+import com.example.creditsimulator.model.Currency;
 
 @Service
 public class CurrencyConversionServiceImpl implements CurrencyConversionService {

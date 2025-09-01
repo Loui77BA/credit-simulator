@@ -1,10 +1,11 @@
 package com.example.creditsimulator.service;
 
-import com.example.creditsimulator.model.LoanSimulationRequest;
-import com.example.creditsimulator.model.LoanSimulationResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
+
+import com.example.creditsimulator.model.LoanSimulationRequest;
+import com.example.creditsimulator.model.LoanSimulationResponse;
 
 @Service
 @Primary
@@ -20,7 +21,7 @@ public class NoOpMessagingService implements MessagingService {
     @Override
     public void sendSimulationRequest(LoanSimulationRequest request) {
         // No-op: em um cenário real, enviaríamos a mensagem para uma fila.
-        // Aqui é processado imediatamente para simplificação.
+        // Aqui processamos imediatamente para simplificação.
         processSimulationRequest(request);
     }
 
